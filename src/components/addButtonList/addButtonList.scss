@@ -1,0 +1,115 @@
+.popup-sidebar {
+    position: relative;
+    top: 15px;
+    z-index: 11;
+    width: 235px;
+    padding: 18px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba($color: #000000, $alpha: 0.2);
+
+    &__closeSvg-btn {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+    }
+
+    &__label {
+        display: block;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+
+    &__input {
+        width: 100%;
+        padding: 5px;
+        &::placeholder {
+            font-size: 12px;
+            color: #C9D1D3;
+        }
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+
+    &__label-color {
+        cursor: pointer;
+    }
+
+    &__btn {
+        border-radius: 4px;
+        background-color: #4DD599;
+        color: #fff;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: #32b57c;    
+        }
+    }
+
+    &__color {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+
+        &--grey {
+            background-color: #C9D1D3;
+        }
+    
+        &--green {
+            background-color: #42B883;
+        }
+    
+        &--blue {
+            background-color: #64C4ED;
+        }
+    
+        &--pink {
+            background-color: #FFBBCC;
+        }
+    
+        &--lime {
+            background-color: #B6E6BD;
+        }
+    
+        &--purple {
+            background-color: #C355F5;
+        }
+    
+        &--black {
+            background-color: #110133;
+        }
+    
+        &--red {
+            background-color: #FF6464;
+        }
+    }
+
+
+}
+
+.popup-sidebar .popup-sidebar__input-color:checked + .popup-sidebar__color::before {
+    border: 2px solid #252525;
+}
