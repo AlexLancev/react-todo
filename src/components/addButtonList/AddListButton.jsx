@@ -1,20 +1,35 @@
 import React, { useState } from "react";
+
 import './addButtonList.scss';
 import closeSVG from '../../assets/img/closeSvg.svg'
 // import classNames from "classnames";
 
-const AddListButton = ({ DB, onAdd }) => {
+const AddListButton = ({ DBcolors, onAdd }) => {
    const [showPopup, setShowPopup] = useState(false);
-   const [seletedColor, setSeletedColor] = useState(DB[0].id);
+   const [seletedColor, setSeletedColor] = useState(DBcolors[0].id);
    const [inputValue, setInputValue] = useState('');
+
+   const onClose = () => {
+      setShowPopup(false);
+      setInputValue('');
+      setSeletedColor(DBcolors[0].id);
+   }
 
    const addListButton = () => {
       if (!inputValue) {
-         alert();
+         alert('Заполните поле');
       } else {
-         onAdd({id: Math.ceil(Math.random() * 10), name: inputValue, colorId: seletedColor});
+         const color = DBcolors.filter((c) => c.id === seletedColor)[0].name;
+         onAdd({ 
+            color: color, 
+            id: Math.random(), 
+            name: inputValue, 
+            colorId: seletedColor, 
+            className: "sidebar__item", 
+            active: false 
+         });
+         onClose();
       }
-
    }
 
    return (
@@ -33,7 +48,7 @@ const AddListButton = ({ DB, onAdd }) => {
          {showPopup && (
             <div className="popup-sidebar">
                <div className="popup-sidebar__inner">
-                  <button onClick={() => setShowPopup(false)} className="popup-sidebar__closeSvg-btn">
+                  <button onClick={onClose} className="popup-sidebar__closeSvg-btn">
                      <img className="popup-sidebar__closeSvg" src={closeSVG} alt="" aria-hidden="true" />
                   </button>
                   <label className="popup-sidebar__label">
@@ -45,7 +60,7 @@ const AddListButton = ({ DB, onAdd }) => {
                         placeholder="Название папки" />
                   </label>
                   <ul className="popup-sidebar__list">
-                     {DB.map((color) => {
+                     {DBcolors.map((color) => {
                         return (
                            <li className="popup-sidebar__item" key={color.id}>
                               <label className="popup-sidebar__label-color">

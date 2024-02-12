@@ -1,18 +1,25 @@
-import React, { useState} from 'react';
-import Tasks from './components/tasks/Tasks';
-import AddListButton from './components/addButtonList/AddListButton'
+import React, { useState } from 'react';
+
+// import axios from 'axios';
+// import Tasks from './components/tasks/Tasks';
+// import AddListButton from './components/addButtonList/AddListButton'
+// import AddTasks from './components/addTasks/AddTasks'
+
 import DB from "../src/assets/db.json";
 
+import { Tasks, AddListButton, AddTasks } from './components'
+
 function App() {
-   let [lists] = useState(
+   let [lists, setLists] = useState(
       DB.lists.map(list => {
          list.color = DB.colors.filter(color => color.id === list.colorId)[0].name;
          return list;
       })
    );
 
-   const onAddList = (ob) => {
-      console.log(ob)
+   const onAddList = (object) => {
+      const newList = [...lists, object];
+      setLists(newList);
    }
 
    return (
@@ -31,14 +38,17 @@ function App() {
                   <Tasks
                      items={lists}
                      isRemovable
+                     onRemove={(itemPer) => console.log(itemPer)}
                   />
                   <AddListButton
                      onAdd={onAddList}
-                     DB={DB.colors}
+                     DBcolors={DB.colors}
                   />
                </div>
             </div>
-            <div className="todo__content"></div>
+            <div className="todo__content">
+               <AddTasks />
+            </div>
          </div>
       </div>
    );
